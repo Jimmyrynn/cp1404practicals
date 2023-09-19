@@ -11,6 +11,7 @@ def main():
     grade_score(score)
     final_score = grade_score(score)
     print(final_score)
+
     score = random.randint(1, 100)
     grade_score(score)
     print(f"Random Score: {score}")
