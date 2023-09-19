@@ -1,3 +1,8 @@
+"""
+CP1404/CP5632 - Practical
+Program to determine grade from a valid score and print stars.
+"""
+
 def main():
     """Determine grade from a valid score and print stars."""
     print("Menu:\n(G)et\n(P)rint\n(S)how\n(Q)uit")
