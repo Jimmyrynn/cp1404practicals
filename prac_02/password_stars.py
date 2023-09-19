@@ -1,3 +1,9 @@
+"""
+CP1404/CP5632 - Practical
+Program to get password and print in asterisks
+"""
+
+
 def main():
     """Get password and print."""
     user_password = get_password()
