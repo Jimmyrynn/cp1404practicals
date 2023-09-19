@@ -1,13 +1,15 @@
 def main():
+    """Determine grade from a valid score and print stars."""
     print("Menu:\n(G)et\n(P)rint\n(S)how\n(Q)uit")
     user_choice = input(">>> ").lower()
     while user_choice != "q":
         if user_choice == 'g':
-            get_valid_score(user_choice)
+            user_score = get_valid_score()
         elif user_choice == 'p':
-            print("P")
+            grade_score(user_score)
+            print(f"{ grade_score(user_score)}")
         elif user_choice == 's':
-            print("S")
+            print('*' * user_score)
         else:
             print("Invalid")
         print("Menu:\n(G)et\n(P)rint\n(S)how\n(Q)uit")
@@ -15,10 +17,27 @@ def main():
     print("Goodbye!")
 
 
-def get_valid_score(user_choice):
-    while 0 > user_choice > 100:
+def get_valid_score():
+    """Get a valid score from the user."""
+    user_score = int(input("Enter Score: "))
+    while 0 < user_score > 100:
         print("Invalid")
-        user_choice = input(">>> ").lower()
+        user_score = input("Enter Score: ")
+    return user_score
+
+
+def grade_score(user_score):
+    """Grade the user score."""
+    if user_score > 100:
+        return "Invalid Score"
+    elif user_score >= 90:
+        return "Excellent"
+    elif user_score >= 50:
+        return "Passable"
+    elif user_score < 50:
+        return "Bad"
+    else:
+        return "Invalid score"
 
 
 main()
