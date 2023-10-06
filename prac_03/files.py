@@ -10,6 +10,7 @@ name = in_file.read()
 in_file.close()
 print("Your name is", name)
 
+
 # c.
 in_file = open("numbers.txt", "r")
 number_1 = int(in_file.readline())
