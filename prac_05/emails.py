@@ -11,8 +11,8 @@ def main():
     user_email = input("Email: ")
     while user_email != '':
         name = get_name_from_email(user_email)
-        valid_name = input(f"Is your name {name.title()} (Y/n) ").lower()
-        if valid_name != 'y' and valid_name != "":
+        valid_selection = input(f"Is your name {name.title()} (Y/n) ").lower()
+        if valid_selection != 'y' and valid_selection != "":
             name = input("Name: ")
         email_to_name[user_email] = name
         user_email = input("Email: ")
