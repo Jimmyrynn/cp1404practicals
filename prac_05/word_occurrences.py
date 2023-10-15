@@ -10,6 +10,6 @@ for word in text.split():
     word_to_frequency[word] = word_to_frequency.get(word, 0) + 1
 words = list(word_to_frequency.keys())
 words.sort()
-longest_word = max((len(word) for word in words))
+maximum_length = max((len(word) for word in words))
 for word in words:
-    print(f"{word:{longest_word}} : {word_to_frequency[word]}")
+    print(f"{word:{maximum_length}} : {word_to_frequency[word]}")
