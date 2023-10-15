@@ -1,5 +1,4 @@
 """
-Word Occurrences
 Estimate: 30 minutes
 Actual:  60 minutes
 """
@@ -17,15 +16,16 @@ def main():
 
 def process_records(records):
     """Create a count of players and championships won."""
-    champion_to_count = {}
+    champion_to_number_of_wins = {}
     countries = set()
     for record in records:
         countries.add(record[INDEX_COUNTRY])
         try:
-            champion_to_count[record[INDEX_CHAMPION]] += 1
+            champion_to_number_of_wins[record[INDEX_CHAMPION]] += 1
+
         except KeyError:
-            champion_to_count[record[INDEX_CHAMPION]] = 1
-    return champion_to_count, countries
+            champion_to_number_of_wins[record[INDEX_CHAMPION]] = 1
+    return champion_to_number_of_wins, countries
 
 
 def display_results(champion_to_count, countries):
