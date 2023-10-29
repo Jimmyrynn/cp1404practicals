@@ -31,7 +31,7 @@ class Car:
         self.odometer += distance
         return distance
 
-    """Return a string containing car information"""
+    """Return a string containing car information."""
     def __repr__(self):
         return f"{self.name}, fuel = {self.fuel}, odometer = {self.odometer}"
 
