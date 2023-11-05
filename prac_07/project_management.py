@@ -11,7 +11,6 @@ def main():
     print_menu()
     user_input = input(">>> ").lower()
     while user_input != 'q':
-
         if user_input == 'l':
             # filename = input("Enter Filename: ")
             filename = "projects.txt"
@@ -25,7 +24,13 @@ def main():
             in_file.close()
 
         elif user_input == 's':
-            print("s")
+            output_file = open("test.txt", 'w')
+            output_file.write(
+                f"Name\tStart Date\tPriority\tCost Estimate\tCompletion Percentage\n")
+            for project in projects:
+                output_file.write(f"{project.name}\t{project.start_date}\t{project.priority}\t{project.cost_estimate}\t{project.completion_percentage}\n")
+            output_file.close()
+
         elif user_input == 'd':
             completed_projects = []
             incomplete_projects = []
@@ -47,6 +52,7 @@ def main():
 
         elif user_input == 'a':
             print("a")
+
         elif user_input == 'u':
             print("u")
         else:
