@@ -1,0 +1,64 @@
+"""
+Estimated: 4hrs
+Actual:
+"""
+from prac_07.project import Project
+
+
+def main():
+    filename = "projects.txt"
+    projects = []
+    print_menu()
+    user_input = input(">>> ").lower()
+    while user_input != 'q':
+
+        if user_input == 'l':
+            # filename = input("Enter Filename: ")
+            filename = "projects.txt"
+            projects = []
+            in_file = open(filename, 'r')
+            in_file.readline()
+            for line in in_file:
+                parts = line.strip().split('\t')
+                project = Project(parts[0], parts[1], int(parts[2]), float(parts[3]), int(parts[4]))
+                projects.append(project)
+            in_file.close()
+
+        elif user_input == 's':
+            print("s")
+        elif user_input == 'd':
+            completed_projects = []
+            incomplete_projects = []
+            for project in projects:
+                if project.completion_percentage < 100:
+                    incomplete_projects.append(project)
+                else:
+                    completed_projects.append(project)
+            print("Uncompleted projects: ")
+            for project in incomplete_projects:
+                print(f" {project}")
+            print("Completed projects: ")
+            for project in completed_projects:
+                print(f" {project}")
+
+
+        elif user_input == 'f':
+            print("f")
+
+        elif user_input == 'a':
+            print("a")
+        elif user_input == 'u':
+            print("u")
+        else:
+            print("Error")
+        print_menu()
+        user_input = input(">>> ").lower()
+
+
+def print_menu():
+    print("(L)oad projects\n(S)ave projects\n(D)isplay projects\n"
+          "(F)ilter projects by date\n(A)dd new project\n(U)pdate"
+          "project\n(Q)uit")
+
+
+main()
