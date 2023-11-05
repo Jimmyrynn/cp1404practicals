@@ -3,6 +3,7 @@ Estimated: 4hrs
 Actual:
 """
 from prac_07.project import Project
+import datetime
 
 
 def main():
@@ -28,7 +29,8 @@ def main():
             output_file.write(
                 f"Name\tStart Date\tPriority\tCost Estimate\tCompletion Percentage\n")
             for project in projects:
-                output_file.write(f"{project.name}\t{project.start_date}\t{project.priority}\t{project.cost_estimate}\t{project.completion_percentage}\n")
+                output_file.write(
+                    f"{project.name}\t{project.start_date}\t{project.priority}\t{project.cost_estimate}\t{project.completion_percentage}\n")
             output_file.close()
 
         elif user_input == 'd':
@@ -48,10 +50,21 @@ def main():
 
 
         elif user_input == 'f':
-            print("f")
+            date_string = input("Show projects that start after date (dd/mm/yy): ")
+            date = datetime.datetime.strptime(date_string, "%d/%m/%Y").date()
+
 
         elif user_input == 'a':
-            print("a")
+            print("Let's add a new project")
+            name = input("Name: ")
+            date_string = input("Start date (dd/mm/yy): ")
+            start_date = datetime.datetime.strptime(date_string, "%d/%m/%Y").date()
+            priority = int(input("Priority: "))
+            cost_estimate = int(input("Cost estimate: $"))
+            completion_percentage = int(input("Percent complete: "))
+            projects.append(Project(name, start_date, priority, cost_estimate, completion_percentage))
+
+
 
         elif user_input == 'u':
             print("u")
