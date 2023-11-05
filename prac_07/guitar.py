@@ -18,6 +18,7 @@ class Guitar:
         return f"{self.name} ({self.year}) : {self.cost}"
 
     def __lt__(self, other):
+        """Compare guitar years."""
         return self.year < other.year
 
     def get_age(self):
@@ -34,8 +35,8 @@ class Guitar:
 
 
 def main():
+    """Read guitars from list, add user input, order them, write back to list."""
     guitars = []
-    print("My guitars!")
     in_file = open("guitars.csv")
     in_file.readline()
     for line in in_file:
@@ -43,9 +44,22 @@ def main():
         guitar = Guitar(parts[0], int(parts[1]), float(parts[2]))
         guitars.append(guitar)
     in_file.close()
+
+    name = input("Name: ")
+    while name != "":
+        year = int(input("Year: "))
+        cost = int(input("Cost: "))
+        guitars.append(Guitar(name, year, cost))
+        name = input("Name: ")
+
     guitars.sort()
     for guitar in guitars:
         print(guitar)
+
+    output_file = open("guitars.csv", 'w')
+    for guitar in guitars:
+        output_file.write(f"{guitar.name}, {guitar.year}, {guitar.cost}\n")
+    output_file.close()
 
 
 main()
