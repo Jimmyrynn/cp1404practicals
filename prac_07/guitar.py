@@ -38,13 +38,25 @@ def main():
     """Read guitars from list, add user input, order them, write back to list."""
     guitars = []
     in_file = open("guitars.csv")
-    in_file.readline()
-    for line in in_file:
-        parts = line.strip().split(',')
-        guitar = Guitar(parts[0], int(parts[1]), float(parts[2]))
-        guitars.append(guitar)
+    read_from_file(guitars, in_file)
     in_file.close()
+    add_guitars(guitars)
+    guitars.sort()
+    for guitar in guitars:
+        print(guitar)
+    write_to_file(guitars)
 
+
+def write_to_file(guitars):
+    """Write to file."""
+    output_file = open("guitars.csv", 'w')
+    for guitar in guitars:
+        output_file.write(f"{guitar.name}, {guitar.year}, {guitar.cost}\n")
+    output_file.close()
+
+
+def add_guitars(guitars):
+    """Add guitars to list."""
     name = input("Name: ")
     while name != "":
         year = int(input("Year: "))
@@ -52,14 +64,14 @@ def main():
         guitars.append(Guitar(name, year, cost))
         name = input("Name: ")
 
-    guitars.sort()
-    for guitar in guitars:
-        print(guitar)
 
-    output_file = open("guitars.csv", 'w')
-    for guitar in guitars:
-        output_file.write(f"{guitar.name}, {guitar.year}, {guitar.cost}\n")
-    output_file.close()
+def read_from_file(guitars, in_file):
+    """Read from file."""
+    in_file.readline()
+    for line in in_file:
+        parts = line.strip().split(',')
+        guitar = Guitar(parts[0], int(parts[1]), float(parts[2]))
+        guitars.append(guitar)
 
 
 main()
