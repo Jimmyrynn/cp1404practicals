@@ -2,8 +2,8 @@
 Estimated: 4hrs
 Actual: 5hrs
 """
-from prac_07.project import Project
 import datetime
+from prac_07.project import Project
 
 
 def main():
@@ -26,11 +26,7 @@ def main():
             print_projects(completed_projects, incomplete_projects)
 
         elif user_input == 'f':  # Incomplete
-            date_string = input("Show projects that start after date (dd/mm/yy): ")
-            date = datetime.datetime.strptime(date_string, "%d/%m/%Y").date()
-            filtered_projects = sorted([project for project in projects if date < project.start_date])
-            for project in filtered_projects:
-                print(project)
+            print(filter_by_date(projects))
 
         elif user_input == 'a':
             print("Let's add a new project")
@@ -44,6 +40,14 @@ def main():
             print("Error")
         print_menu()
         user_input = input(">>> ").lower()
+
+
+def filter_by_date(projects):
+    """Return a list of filtered sorted dates"""
+    filter_date = input("Filter date (dd/mm/yyyy): ")
+    filter_date = datetime.datetime.strptime(filter_date, "%d/%m/%Y")
+    return sorted([project for project in projects if
+                   datetime.datetime.strptime(project.start_date, "%d/%m/%Y") > filter_date])
 
 
 def determine_completion(projects):
@@ -89,9 +93,9 @@ def print_projects(completed_projects, incomplete_projects):
 
 def write_to_file(projects):
     """Write to an output file."""
-    output_file = open("test.txt", 'w')
-    output_file.write(
-        f"Name\tStart Date\tPriority\tCost Estimate\tCompletion Percentage\n")
+    with open("test.txt", 'w', encoding='utf-8') as output_file:
+        output_file.write(
+            "Name\tStart Date\tPriority\tCost Estimate\tCompletion Percentage\n")
     for project in projects:
         output_file.write(
             f"{project.name}\t{project.start_date}\t{project.priority}"
@@ -101,8 +105,8 @@ def write_to_file(projects):
 
 def read_from_file(filename, projects):
     """Read data from file."""
-    in_file = open(filename, 'r')
-    in_file.readline()
+    with open(filename, 'r', encoding='utf-8') as in_file:
+        in_file.readline()
     for line in in_file:
         parts = line.strip().split('\t')
         project = Project(parts[0], parts[1], int(parts[2]), float(parts[3]), int(parts[4]))

@@ -22,7 +22,7 @@ class Project:
 
     def __gt__(self, other):
         """Compare project years."""
-        return self.start_date > other.year
+        return self.start_date > other.start_date
 
     def update_percentage(self, new_percentage):
         """Update percentage."""
