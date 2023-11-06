@@ -3,6 +3,7 @@ Estimated: 4hrs
 Actual: 5hrs
 """
 
+
 class Project:
     """Represent a Project object."""
 
@@ -26,5 +27,3 @@ class Project:
     def update_percentage(self, new_percentage):
         """Update percentage."""
         self.completion_percentage = new_percentage
-
-
