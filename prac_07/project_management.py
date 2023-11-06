@@ -81,10 +81,10 @@ def print_projects(completed_projects, incomplete_projects):
     """Print complete & incomplete projects."""
     print("Uncompleted projects: ")
     for project in incomplete_projects:
-        print(f" {project}")
+        print(project)
     print("Completed projects: ")
     for project in completed_projects:
-        print(f" {project}")
+        print(project)
 
 
 def write_to_file(projects):
