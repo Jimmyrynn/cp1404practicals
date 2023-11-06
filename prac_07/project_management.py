@@ -7,6 +7,7 @@ import datetime
 
 
 def main():
+    """Program to Load, Save, Display, Filter, Add & Update projects. """
     # filename = "projects.txt"
     projects = []
     print_menu()
@@ -15,25 +16,19 @@ def main():
         if user_input == 'l':
             filename = input("Enter Filename: ")
             projects = []
-            read_data(filename, projects)
+            read_from_file(filename, projects)
 
         elif user_input == 's':
             write_to_file(projects)
 
         elif user_input == 'd':
-            completed_projects = []
-            incomplete_projects = []
-            for project in projects:
-                if project.completion_percentage < 100:
-                    incomplete_projects.append(project)
-                else:
-                    completed_projects.append(project)
+            completed_projects, incomplete_projects = determine_completion(projects)
             print_projects(completed_projects, incomplete_projects)
 
         elif user_input == 'f':  # Incomplete
             date_string = input("Show projects that start after date (dd/mm/yy): ")
             date = datetime.datetime.strptime(date_string, "%d/%m/%Y").date()
-            filtered_projects = [project for project in projects if project.start_date > date]
+            filtered_projects = sorted([project for project in projects if date < project.start_date])
             for project in filtered_projects:
                 print(project)
 
@@ -49,6 +44,18 @@ def main():
             print("Error")
         print_menu()
         user_input = input(">>> ").lower()
+
+
+def determine_completion(projects):
+    """Determine if project is completed."""
+    completed_projects = []
+    incomplete_projects = []
+    for project in projects:
+        if project.completion_percentage < 100:
+            incomplete_projects.append(project)
+        else:
+            completed_projects.append(project)
+    return completed_projects, incomplete_projects
 
 
 def update_project(projects):
@@ -92,7 +99,7 @@ def write_to_file(projects):
     output_file.close()
 
 
-def read_data(filename, projects):
+def read_from_file(filename, projects):
     """Read data from file."""
     in_file = open(filename, 'r')
     in_file.readline()
